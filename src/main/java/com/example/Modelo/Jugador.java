@@ -1,6 +1,6 @@
 package com.example.Modelo;
 
-import java.util.List;
+//import java.util.List;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
@@ -14,7 +14,7 @@ public class Jugador {
     protected float danoMultiplicador;
     protected int segundosVisibles;
     protected int monocosPorParry;
-    protected List<String> ataqueString;
+    // protected List<String> ataqueString;
     // protected List<Ataque> ataqueLista;
     // protected Ataque ataqueElegido;
 
@@ -66,13 +66,13 @@ public class Jugador {
         this.monocosPorParry = monocosPorParry;
     }
 
-    public List<String> getAtaqueString() {
-        return this.ataqueString;
-    }
-
-    public void setAtaqueString(List<String> ataquesString) {
-        this.ataqueString = ataquesString;
-    }
+    // public List<String> getAtaqueString() {
+    // return this.ataqueString;
+    // }
+    //
+    // public void setAtaqueString(List<String> ataquesString) {
+    // this.ataqueString = ataquesString;
+    // }
 
     // public Ataque getAtaqueElegido() {
     // return this.ataqueElegido;
@@ -90,19 +90,26 @@ public class Jugador {
     // this.ataqueLista = ataqueLista;
     // }
 
-    public void ejecutarAtaqueEnemigo(int dificultad, int visibilidad, final boolean[] pulsado, TextArea txtConsola)
+    public void ejecutarAtaqueEnemigo(int dificultad, int visibilidad, final boolean[] pulsado, TextArea txtArea,
+            ManagerJugador mj)
             throws InterruptedException {
+
+        if (txtArea == null) {
+            System.out.println("ERROR: El TextArea no ha llegado al metodo. Revisa el fx:id en Scene Builder.");
+            return;
+        }
 
         pulsado[0] = false;
 
         Thread contadorThread = new Thread(() -> {
             try {
-                for (int i = 1; i < dificultad * 2 && pulsado[0]; i++) {
+                for (int i = 1; i < dificultad * 2 && !pulsado[0]; i++) {
                     contadorAtaque = i;
 
-                    if (i <= visibilidad)
+                    if (i <= visibilidad) {
                         mensaje = i + "...";
-                    Platform.runLater(() -> txtConsola.appendText(mensaje));
+                        Platform.runLater(() -> txtArea.appendText(mensaje));
+                    }
 
                     Thread.sleep(1000);
 
@@ -116,20 +123,31 @@ public class Jugador {
         contadorThread.join();
 
         if (pulsado[0] && contadorAtaque == dificultad) {
-            Platform.runLater(() -> txtConsola.appendText("Parry exitoso"));
-            Platform.runLater(() -> txtConsola.appendText("Has conseguido " + monocosPorParry + " Monoco(s)"));
+            Platform.runLater(() -> txtArea.appendText("Parry exitoso"));
+            Platform.runLater(() -> txtArea.appendText("Has conseguido " + monocosPorParry + " Monoco(s)"));
             monocos += monocosPorParry;
         } else {
-            Platform.runLater(() -> txtConsola.appendText("Fallaste (" + contadorAtaque + ")"));
+            Platform.runLater(() -> txtArea.appendText("Fallaste (" + contadorAtaque + ")"));
             vida -= 3;
             if (vida < 0)
                 vida = 0;
             Platform.runLater(
-                    () -> txtConsola.appendText("Has perdido " + 3 + " de vida. Tienes " + vida + " puntos de vida"));
+                    () -> txtArea.appendText("Has perdido " + 3 + " de vida. Tienes " + vida + " puntos de vida"));
         }
 
-        // JugadorManager.ordenarEnemigos();
-        Platform.runLater(()->txtConsola.appendText("El ataque ha finalizado y los enemigos han rotado"));
+        mj.ordenarEnemigos();
+        Platform.runLater(() -> txtArea.appendText("El ataque ha finalizado y los enemigos han rotado"));
     }
 
+    @Override
+    public String toString() {
+        return "Jugador: " + getNombre() + "\n" +
+                "--------------------------\n" +
+                "Vida: " + getVida() + " HP\n" +
+                "Monocos: " + getMonocos() + "\n" +
+                "Multiplicador: " + getDanoMultiplicador() + "x\n" +
+                "Segundos Visibles: " + getSegundosVisibles() + "s\n" +
+                "Monocos por Parry: " + getMonocosPorParry() + "\n" +
+                "--------------------------";
+    }
 }
