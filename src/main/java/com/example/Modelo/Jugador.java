@@ -1,9 +1,13 @@
 package com.example.Modelo;
+
 import java.util.List;
+
+import javafx.application.Platform;
+import javafx.scene.control.TextArea;
 
 public class Jugador {
     static int contadorAtaque = 0;
-
+    static String mensaje = "";
     protected float vida;
     protected String nombre;
     protected int monocos;
@@ -11,9 +15,8 @@ public class Jugador {
     protected int segundosVisibles;
     protected int monocosPorParry;
     protected List<String> ataqueString;
-   // protected List<Ataque> ataqueLista;
-   // protected Ataque ataqueElegido;
-
+    // protected List<Ataque> ataqueLista;
+    // protected Ataque ataqueElegido;
 
     public float getVida() {
         return this.vida;
@@ -71,81 +74,62 @@ public class Jugador {
         this.ataqueString = ataquesString;
     }
 
+    // public Ataque getAtaqueElegido() {
+    // return this.ataqueElegido;
+    // }
+    //
+    // public void setAtaqueElegido(Ataque ataque) {
+    // this.ataqueElegido = ataque;
+    // }
+    //
+    // public List<Ataque> getAtaqueLista() {
+    // return this.ataqueLista;
+    // }
+    //
+    // public void setAtaqueLista(List<Ataque> ataqueLista) {
+    // this.ataqueLista = ataqueLista;
+    // }
 
-//   public Ataque getAtaqueElegido() {
-//       return this.ataqueElegido;
-//   }
-//
-//   public void setAtaqueElegido(Ataque ataque) {
-//       this.ataqueElegido = ataque;
-//   }
-//
-//   public List<Ataque> getAtaqueLista() {
-//       return this.ataqueLista;
-//   }
-//
-//   public void setAtaqueLista(List<Ataque> ataqueLista) {
-//       this.ataqueLista = ataqueLista;
-//   }
+    public void ejecutarAtaqueEnemigo(int dificultad, int visibilidad, final boolean[] pulsado, TextArea txtConsola)
+            throws InterruptedException {
 
+        pulsado[0] = false;
 
+        Thread contadorThread = new Thread(() -> {
+            try {
+                for (int i = 1; i < dificultad * 2 && pulsado[0]; i++) {
+                    contadorAtaque = i;
 
+                    if (i <= visibilidad)
+                        mensaje = i + "...";
+                    Platform.runLater(() -> txtConsola.appendText(mensaje));
 
+                    Thread.sleep(1000);
 
-
-
-
-    public void ejecutarAtaqueEnemigo(int dificultad, int visibilidad) throws InterruptedException {
-
-    System.out.println("El enemigo va a realizar un ataque de dificultad: " + dificultad);
-    System.out.println("Presiona enter cuando creas que el contador va por: \n\t\t\t\t\u001B[31m" + dificultad + "\u001B[m");
-
-    final boolean[] terminado = {false};
-
-    Thread contadorThread = new Thread(() -> {
-        try {
-            for (int i = 1; i < dificultad * 2 && !terminado[0]; i++) {
-                contadorAtaque = i;
-
-                if (i <= visibilidad)
-                    System.out.println(i + "...");
-
-                Thread.sleep(300);
-                
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    });
+        });
 
-    Thread inputThread = new Thread(() -> {
-        
-       
+        contadorThread.start();
+        contadorThread.join();
 
-        terminado[0] = true;
-
-        if (contadorAtaque == dificultad) {
-            System.out.println("Parry exitoso");
-            System.out.println("Has conseguido " + monocosPorParry + " Monoco(s)");
+        if (pulsado[0] && contadorAtaque == dificultad) {
+            Platform.runLater(() -> txtConsola.appendText("Parry exitoso"));
+            Platform.runLater(() -> txtConsola.appendText("Has conseguido " + monocosPorParry + " Monoco(s)"));
             monocos += monocosPorParry;
         } else {
-            System.out.println("Fallaste (" + contadorAtaque + ")");
-            vida -=3;
-            if(vida<0) vida=0;
-            System.out.println("Has perdido " + 3 + " de vida. Tienes " + vida + " puntos de vida");
+            Platform.runLater(() -> txtConsola.appendText("Fallaste (" + contadorAtaque + ")"));
+            vida -= 3;
+            if (vida < 0)
+                vida = 0;
+            Platform.runLater(
+                    () -> txtConsola.appendText("Has perdido " + 3 + " de vida. Tienes " + vida + " puntos de vida"));
         }
-    });
 
-    contadorThread.start();
-    inputThread.start();
-
-    contadorThread.join();
-    inputThread.join();
-
-  //  JugadorManager.ordenarEnemigos();
-    System.out.println("El ataque ha finalizado y los enemigos han rotado");
-}
-
-    
+        // JugadorManager.ordenarEnemigos();
+        Platform.runLater(()->txtConsola.appendText("El ataque ha finalizado y los enemigos han rotado"));
+    }
 
 }
