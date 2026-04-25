@@ -13,7 +13,8 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
@@ -23,7 +24,6 @@ import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable {
 
-   
 
     private Jugador jugadorGeneral;
 
@@ -59,6 +59,14 @@ public class PrimaryController implements Initializable {
             e.printStackTrace();
         }
 
+        btnEmpezar.setOnAction(event ->{
+            try {
+                Empezar();
+            } catch (IOException e) {
+                    
+                e.printStackTrace();
+            }
+        });
         
 
         cbojugador.setItems(FXCollections.observableArrayList("Fabricio_Master", "Entrenador_Pro", "Shadow_Player",
@@ -77,23 +85,25 @@ public class PrimaryController implements Initializable {
 
     }
 
-    
+    public void Empezar() throws IOException {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prueba.fxml"));
+        Parent root = loader.load();
 
-    public void Empezar() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/secondary.fxml"));
-        // Parent root = loader.load();
+        PruebaController controllerSecond = loader.getController();
 
-        SecondaryController controllerSecond = loader.getController();
 
         if (jugadorGeneral != null) {
-            // controllerSecond.cargarDatos(jugadorGeneral);
-            // Scene escena = new Scene(root);
+            controllerSecond.cargarDatos(jugadorGeneral);
+            Scene escena = new Scene(root);
             Stage stage = (Stage) btnEmpezar.getScene().getWindow();
-            // stage.setScene(escena);
+            stage.setScene(escena);
             stage.show();
         } else {
-            btnEmpezar.setText("ERROR: Asegúrate de escribir bien los nombres de los Pokémon.");
+            txtjugadorelegido.setText("ERROR: Asegúrate de escribir bien los nombres de los Pokémon.");
         }
+
     }
 
 }
+
+
