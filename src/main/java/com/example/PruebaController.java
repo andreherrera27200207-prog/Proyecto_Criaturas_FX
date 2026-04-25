@@ -29,7 +29,7 @@ public class PruebaController implements Initializable {
 
     private ManagerJugador mj;
     private ReaderJugador rj;
-
+    
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
