@@ -13,12 +13,11 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+
+
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -38,7 +37,7 @@ public class PrimaryController implements Initializable {
     private Button btnEmpezar;
 
     @FXML
-    private ComboBox cbojugador;
+    private ComboBox<String> cbojugador;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
