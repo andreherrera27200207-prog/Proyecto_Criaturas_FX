@@ -24,12 +24,7 @@ import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable {
 
-    @FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
-    }
-
-    final boolean[] verdad = { false };
+   
 
     private Jugador jugadorGeneral;
 
@@ -37,6 +32,13 @@ public class PrimaryController implements Initializable {
     private ReaderJugador rj;
 
     @FXML
+    private TextField txtjugadorelegido;
+
+    @FXML
+    private Button btnEmpezar;
+
+    @FXML
+    private ComboBox cbojugador;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -58,9 +60,7 @@ public class PrimaryController implements Initializable {
             e.printStackTrace();
         }
 
-        btnEmpezar.setOnAction(event -> {
-
-        });
+        
 
         cbojugador.setItems(FXCollections.observableArrayList("Fabricio_Master", "Entrenador_Pro", "Shadow_Player",
                 "SpeedRunner", "Tank_User"));
@@ -78,14 +78,7 @@ public class PrimaryController implements Initializable {
 
     }
 
-    @FXML
-    private TextField txtjugadorelegido;
-
-    @FXML
-    private Button btnEmpezar;
-
-    @FXML
-    private ComboBox cbojugador;
+    
 
     public void Empezar() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/secondary.fxml"));
