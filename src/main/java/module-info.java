@@ -8,4 +8,11 @@ module com.example {
     opens com.example.Modelo to com.google.gson;
     exports com.example;
     exports com.example.Modelo;
+
+
+    requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.annotation;
+
+
+
 }

@@ -4,8 +4,15 @@ package com.example.Modelo;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Jugador {
+
+    @JsonProperty("Jugador") 
+    public String jugadorTag;
+
     static int contadorAtaque = 0;
     static String mensaje = "";
     protected float vida;
@@ -14,9 +21,66 @@ public class Jugador {
     protected float danoMultiplicador;
     protected int segundosVisibles;
     protected int monocosPorParry;
+    protected int turnos; //turnos desde que empezó la partida
+    protected boolean ftwca; //variable de un ataque
+    private int turnoDesactivacion; //variable de un ataque
+    protected int nGolpes; //variable para varios ataques
     // protected List<String> ataqueString;
     // protected List<Ataque> ataqueLista;
     // protected Ataque ataqueElegido;
+
+    public Jugador(){
+
+    }
+
+
+    public int getTurnoDesactivacion() {
+        return this.turnoDesactivacion;
+    }
+
+    public void setTurnoDesactivacion(int turnoDesactivacion) {
+        this.turnoDesactivacion = turnoDesactivacion;
+    }
+
+    public int getNGolpes() {
+        return this.nGolpes;
+    }
+
+    public void setNGolpes(int nGolpes) {
+        this.nGolpes = nGolpes;
+    }
+
+    public void recibirDano(float damage){
+        vida-=damage;
+    }
+
+    public String getJugadorTag() {
+        return this.jugadorTag;
+    }
+
+    public void setJugadorTag(String jugadorTag) {
+        this.jugadorTag = jugadorTag;
+    }
+
+    public int getTurnos() {
+        return this.turnos;
+    }
+
+    public void setTurnos(int turnos) {
+        this.turnos = turnos;
+    }
+
+    public boolean isFtwca() {
+        return this.ftwca;
+    }
+
+    public boolean getFtwca() {
+        return this.ftwca;
+    }
+
+    public void setFtwca(boolean ftwca) {
+        this.ftwca = ftwca;
+    }
 
     public float getVida() {
         return this.vida;
@@ -90,6 +154,14 @@ public class Jugador {
     // this.ataqueLista = ataqueLista;
     // }
 
+    public void anadirGolpes(int n){
+        nGolpes += n;
+    }
+    public void Ftwca(int turno){
+
+        turnoDesactivacion = turno + 1;
+    }
+
     public void ejecutarAtaqueEnemigo(int dificultad, int visibilidad, final boolean[] pulsado, TextArea txtArea,
             ManagerJugador mj)
             throws InterruptedException {
@@ -129,12 +201,16 @@ public class Jugador {
         } else {
             Platform.runLater(() -> txtArea.appendText("Fallaste (" + contadorAtaque + ")"));
             vida -= 3;
+            nGolpes=0;
             if (vida < 0)
                 vida = 0;
             Platform.runLater(
                     () -> txtArea.appendText("Has perdido " + 3 + " de vida. Tienes " + vida + " puntos de vida"));
         }
-
+        if(turnos == turnoDesactivacion){
+            danoMultiplicador-=1;
+        }
+        turnos++;
         mj.ordenarEnemigos();
         Platform.runLater(() -> txtArea.appendText("El ataque ha finalizado y los enemigos han rotado"));
     }
