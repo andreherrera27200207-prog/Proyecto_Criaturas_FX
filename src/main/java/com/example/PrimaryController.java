@@ -85,7 +85,7 @@ public class PrimaryController implements Initializable {
     private Button btnEmpezar;
 
     @FXML
-    private ComboBox cbojugador;
+    private ComboBox<String> cbojugador;
 
     public void Empezar() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/secondary.fxml"));
