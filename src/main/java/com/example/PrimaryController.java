@@ -18,12 +18,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
-
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable {
-
+    /**
+     * @author Emilio
+     * @author Fabricio
+     * @author JoseManuel
+     */
 
     private Jugador jugadorGeneral;
 
@@ -59,15 +62,14 @@ public class PrimaryController implements Initializable {
             e.printStackTrace();
         }
 
-        btnEmpezar.setOnAction(event ->{
+        btnEmpezar.setOnAction(event -> {
             try {
                 Empezar();
             } catch (IOException e) {
-                    
+
                 e.printStackTrace();
             }
         });
-        
 
         cbojugador.setItems(FXCollections.observableArrayList("Fabricio_Master", "Entrenador_Pro", "Shadow_Player",
                 "SpeedRunner", "Tank_User"));
@@ -86,11 +88,10 @@ public class PrimaryController implements Initializable {
     }
 
     public void Empezar() throws IOException {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prueba.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prueba.fxml"));
         Parent root = loader.load();
 
         PruebaController controllerSecond = loader.getController();
-
 
         if (jugadorGeneral != null) {
             controllerSecond.cargarDatos(jugadorGeneral);
@@ -105,5 +106,3 @@ public class PrimaryController implements Initializable {
     }
 
 }
-
-

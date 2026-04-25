@@ -84,12 +84,17 @@ public class PruebaController implements Initializable {
     @FXML
     private Label lblJugador;
 
+    
     public void buscarPorNombre() {
         jugadorGeneral = mj.buscarJugador(txtNombre.getText());
         txtNombre.setText("");
         lblJugador.setText(jugadorGeneral.getNombre());
     }
 
+    /**
+     * 
+     * @param jugador
+     */
     public void cargarDatos(Jugador jugador){
         this.jugadorGeneral = jugador;
     }

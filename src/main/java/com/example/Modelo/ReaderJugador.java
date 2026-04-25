@@ -13,10 +13,22 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class ReaderJugador implements InterfaceReaderJugador {
+    /**
+     * @author Emilio
+     * @author Fabricio
+     * @author JoseManuel
+     */
+
     private Path carpeta;
     private Path fichero;
     private Gson gson;
 
+    /**
+     * 
+     * @param ruta_carpeta
+     * @param ruta_fichero
+     * @throws IOException
+     */
     public ReaderJugador(String ruta_carpeta, String ruta_fichero) throws IOException {
         this.carpeta = Paths.get(ruta_carpeta);
         if (!Files.exists(carpeta)) {
@@ -35,7 +47,10 @@ public class ReaderJugador implements InterfaceReaderJugador {
 
     }
 
-   
+    /**
+     * @param jugador
+     */
+
     @Override
     public void guardarJugador(Jugador jugador) throws Exception {
 
@@ -48,7 +63,9 @@ public class ReaderJugador implements InterfaceReaderJugador {
         Files.writeString(fichero, json, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
-   
+    /**
+     * @return lista de jugadores
+     */
     @Override
     public List<Jugador> leer() throws Exception {
         if (Files.size(fichero) == 0) {
@@ -63,7 +80,5 @@ public class ReaderJugador implements InterfaceReaderJugador {
 
         return (jugadores_json != null) ? jugadores_json : new ArrayList<>();
     }
-
-    
 
 }

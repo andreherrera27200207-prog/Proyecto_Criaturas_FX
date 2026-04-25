@@ -9,8 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Jugador {
+    /**
+     * @author Emilio
+     * @author Fabricio
+     * @author JoseManuel
+     */
 
-    @JsonProperty("Jugador") 
+    @JsonProperty("Jugador")
     public String jugadorTag;
 
     static int contadorAtaque = 0;
@@ -21,111 +26,206 @@ public class Jugador {
     protected float danoMultiplicador;
     protected int segundosVisibles;
     protected int monocosPorParry;
-    protected int turnos; //turnos desde que empezó la partida
-    protected boolean ftwca; //variable de un ataque
-    private int turnoDesactivacion; //variable de un ataque
-    protected int nGolpes; //variable para varios ataques
+    protected int turnos; // turnos desde que empezó la partida
+    protected boolean ftwca; // variable de un ataque
+    private int turnoDesactivacion; // variable de un ataque
+    protected int nGolpes; // variable para varios ataques
     // protected List<String> ataqueString;
     // protected List<Ataque> ataqueLista;
     // protected Ataque ataqueElegido;
 
-    public Jugador(){
+    public Jugador() {
 
     }
 
-
+    /**
+     * 
+     * @return turnoDesactivacion
+     */
     public int getTurnoDesactivacion() {
         return this.turnoDesactivacion;
     }
 
+    /**
+     * 
+     * @param turnoDesactivacion
+     */
     public void setTurnoDesactivacion(int turnoDesactivacion) {
         this.turnoDesactivacion = turnoDesactivacion;
     }
 
+    /**
+     * 
+     * @return ngolpes
+     */
     public int getNGolpes() {
         return this.nGolpes;
     }
 
+    /**
+     * 
+     * @param nGolpes
+     */
     public void setNGolpes(int nGolpes) {
         this.nGolpes = nGolpes;
     }
 
-    public void recibirDano(float damage){
-        vida-=damage;
+    /**
+     * 
+     * @param damage
+     */
+    public void recibirDano(float damage) {
+        vida -= damage;
     }
 
+    /**
+     * 
+     * @return el tag del jugador
+     */
     public String getJugadorTag() {
         return this.jugadorTag;
     }
 
+    /**
+     * 
+     * @param jugadorTag
+     */
     public void setJugadorTag(String jugadorTag) {
         this.jugadorTag = jugadorTag;
     }
 
+    /**
+     * 
+     * @return los turnos del jugador
+     */
     public int getTurnos() {
         return this.turnos;
     }
 
+    /**
+     * 
+     * @param turnos
+     */
     public void setTurnos(int turnos) {
         this.turnos = turnos;
     }
 
+    /**
+     * 
+     * @return ftwca
+     */
     public boolean isFtwca() {
         return this.ftwca;
     }
 
+    /**
+     * 
+     * @return ftwca cambiado
+     */
     public boolean getFtwca() {
         return this.ftwca;
     }
 
+    /**
+     * 
+     * @param ftwca
+     */
     public void setFtwca(boolean ftwca) {
         this.ftwca = ftwca;
     }
 
+    /**
+     * 
+     * @return la vida del jugador
+     */
     public float getVida() {
         return this.vida;
     }
 
+    /**
+     * 
+     * @param vida
+     */
     public void setVida(float vida) {
         this.vida = vida;
     }
 
+    /**
+     * 
+     * @return nombre del jugador
+     */
     public String getNombre() {
         return this.nombre;
     }
 
+    /**
+     * 
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * 
+     * @return monococos del jugador
+     */
     public int getMonocos() {
         return this.monocos;
     }
 
+    /**
+     * 
+     * @param monocos
+     */
     public void setMonocos(int monocos) {
         this.monocos = monocos;
     }
 
+    /**
+     * 
+     * @return el danoMultiplicador del jugador
+     */
     public float getDanoMultiplicador() {
         return this.danoMultiplicador;
     }
 
+    /**
+     * 
+     * @param danoMultiplicador
+     */
     public void setDanoMultiplicador(float danoMultiplicador) {
         this.danoMultiplicador = danoMultiplicador;
     }
 
+    /**
+     * 
+     * @return segundos visibles que tiene el jugador
+     */
     public int getSegundosVisibles() {
         return this.segundosVisibles;
     }
 
+    /**
+     * 
+     * @param segundosVisibles
+     */
     public void setSegundosVisibles(int segundosVisibles) {
         this.segundosVisibles = segundosVisibles;
     }
 
+    /**
+     * 
+     * @return los monococos ganados por un parry
+     */
     public int getMonocosPorParry() {
         return this.monocosPorParry;
     }
 
+    /**
+     * 
+     * @param monocosPorParry
+     */
     public void setMonocosPorParry(int monocosPorParry) {
         this.monocosPorParry = monocosPorParry;
     }
@@ -154,14 +254,32 @@ public class Jugador {
     // this.ataqueLista = ataqueLista;
     // }
 
-    public void anadirGolpes(int n){
+    /**
+     * 
+     * @param n
+     */
+    public void anadirGolpes(int n) {
         nGolpes += n;
     }
-    public void Ftwca(int turno){
+
+    /**
+     * 
+     * @param turno
+     */
+    public void Ftwca(int turno) {
 
         turnoDesactivacion = turno + 1;
     }
 
+    /**
+     * 
+     * @param dificultad
+     * @param visibilidad
+     * @param pulsado
+     * @param txtArea
+     * @param mj
+     * @throws InterruptedException
+     */
     public void ejecutarAtaqueEnemigo(int dificultad, int visibilidad, final boolean[] pulsado, TextArea txtArea,
             ManagerJugador mj)
             throws InterruptedException {
@@ -201,22 +319,23 @@ public class Jugador {
         } else {
             Platform.runLater(() -> txtArea.appendText("Fallaste (" + contadorAtaque + ")"));
             vida -= 3;
-            nGolpes=0;
+            nGolpes = 0;
             if (vida < 0)
                 vida = 0;
             Platform.runLater(
                     () -> txtArea.appendText("Has perdido " + 3 + " de vida. Tienes " + vida + " puntos de vida"));
         }
-        if(turnos == turnoDesactivacion){
-            danoMultiplicador-=1;
+        if (turnos == turnoDesactivacion) {
+            danoMultiplicador -= 1;
         }
         turnos++;
         mj.ordenarEnemigos();
         Platform.runLater(() -> txtArea.appendText("El ataque ha finalizado y los enemigos han rotado"));
     }
 
-    
-
+    /**
+     * devuelve los valores del jugador cuando se acceda a el imprimiendo el jugador por pantalla
+     */
     @Override
     public String toString() {
         return "Jugador: " + getNombre() + "\n" +
