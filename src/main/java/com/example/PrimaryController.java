@@ -67,7 +67,7 @@ public class PrimaryController implements Initializable {
 
         cbojugador.setOnAction(event -> {
 
-            String jugador = (String) cbojugador.getValue();
+            String jugador = cbojugador.getValue();
             jugadorGeneral = mj.buscarJugador(jugador);
 
             if (jugadorGeneral != null) {
