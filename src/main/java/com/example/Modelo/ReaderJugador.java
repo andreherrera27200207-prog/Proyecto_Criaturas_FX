@@ -48,6 +48,14 @@ public class ReaderJugador implements InterfaceReaderJugador {
         Files.writeString(fichero, json, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
+    public void actualizarJSON(List<Jugador> lista_actualizada) throws IOException{
+        String json = gson.toJson(lista_actualizada);
+        Files.writeString(fichero, json, 
+        java.nio.file.StandardOpenOption.CREATE, 
+        java.nio.file.StandardOpenOption.TRUNCATE_EXISTING, 
+        java.nio.file.StandardOpenOption.WRITE);
+    }
+
    
     @Override
     public List<Jugador> leer() throws Exception {
