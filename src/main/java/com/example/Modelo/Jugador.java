@@ -195,17 +195,17 @@ public class Jugador {
         contadorThread.join();
 
         if (pulsado[0] && contadorAtaque == dificultad) {
-            Platform.runLater(() -> txtArea.appendText("Parry exitoso"));
-            Platform.runLater(() -> txtArea.appendText("Has conseguido " + monocosPorParry + " Monoco(s)"));
+            Platform.runLater(() -> txtArea.appendText("\nParry exitoso"));
+            Platform.runLater(() -> txtArea.appendText("\nHas conseguido " + monocosPorParry + " Monoco(s)"));
             monocos += monocosPorParry;
         } else {
-            Platform.runLater(() -> txtArea.appendText("Fallaste (" + contadorAtaque + ")"));
+            Platform.runLater(() -> txtArea.appendText("\nFallaste (" + contadorAtaque + ")"));
             vida -= 3;
             nGolpes=0;
             if (vida < 0)
                 vida = 0;
             Platform.runLater(
-                    () -> txtArea.appendText("Has perdido " + 3 + " de vida. Tienes " + vida + " puntos de vida"));
+                    () -> txtArea.appendText("\nHas perdido " + 3 + " de vida. Tienes " + vida + " puntos de vida"));
         }
         if(turnos == turnoDesactivacion){
             danoMultiplicador-=1;

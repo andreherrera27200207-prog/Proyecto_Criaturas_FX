@@ -92,6 +92,7 @@ public class PruebaController implements Initializable {
 
     public void cargarDatos(Jugador jugador){
         this.jugadorGeneral = jugador;
+        lblJugador.setText(jugadorGeneral.getNombre());
     }
 
     public void Empezar() {

@@ -1,4 +1,8 @@
-package com.example.Modelo;
+package com.example.Modelo.Efectos;
+
+import com.example.Modelo.Partida;
+
+import com.example.Modelo.Efectos.Efecto;
 
 public class ParaAquellosQueVenganDespues implements Efecto{
 
