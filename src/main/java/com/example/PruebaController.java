@@ -29,9 +29,10 @@ public class PruebaController implements Initializable {
 
     private ManagerJugador mj;
     private ReaderJugador rj;
-
+    
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        cargarDatos(jugadorGeneral);
         try {
             rj = new ReaderJugador("carpeta", "jugadores.json");
             mj = new ManagerJugador();
@@ -87,6 +88,10 @@ public class PruebaController implements Initializable {
         jugadorGeneral = mj.buscarJugador(txtNombre.getText());
         txtNombre.setText("");
         lblJugador.setText(jugadorGeneral.getNombre());
+    }
+
+    public void cargarDatos(Jugador jugador){
+        this.jugadorGeneral = jugador;
     }
 
     public void Empezar() {

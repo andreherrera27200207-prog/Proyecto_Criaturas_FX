@@ -215,6 +215,8 @@ public class Jugador {
         Platform.runLater(() -> txtArea.appendText("El ataque ha finalizado y los enemigos han rotado"));
     }
 
+    
+
     @Override
     public String toString() {
         return "Jugador: " + getNombre() + "\n" +
