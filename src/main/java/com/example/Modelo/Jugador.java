@@ -220,16 +220,7 @@ public class Jugador {
 
 
 
-        try{
-
-            mj.guardarJugador(this);
-            List<Jugador> lista = new ArrayList<>(mj.getJugadores().values());
-            rj.actualizarJSON(lista);
-
-        } catch (Exception e){
-
-            e.printStackTrace();
-        }
+        
 
         
 
