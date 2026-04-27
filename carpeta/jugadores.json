@@ -1,27 +1,11 @@
 [
   {
-    "vida": 200.0,
-    "nombre": "Tank_User",
-    "monocos": 0,
-    "danoMultiplicador": 0.8,
-    "segundosVisibles": 10,
-    "monocosPorParry": 3,
-    "turnos": 0,
-    "ftwca": false,
-    "turnoDesactivacion": 0,
-    "nGolpes": 0
-  },
-  {
-    "vida": 97.0,
+    "vida": 100.0,
     "nombre": "Fabricio_Master",
-    "monocos": 12,
-    "danoMultiplicador": 0.5,
+    "monocos": 10,
+    "danoMultiplicador": 1.5,
     "segundosVisibles": 5,
-    "monocosPorParry": 2,
-    "turnos": 2,
-    "ftwca": false,
-    "turnoDesactivacion": 0,
-    "nGolpes": 0
+    "monocosPorParry": 2
   },
   {
     "vida": 85.5,
@@ -29,23 +13,7 @@
     "monocos": 25,
     "danoMultiplicador": 2.0,
     "segundosVisibles": 3,
-    "monocosPorParry": 5,
-    "turnos": 0,
-    "ftwca": false,
-    "turnoDesactivacion": 0,
-    "nGolpes": 0
-  },
-  {
-    "vida": 50.0,
-    "nombre": "SpeedRunner",
-    "monocos": 50,
-    "danoMultiplicador": 3.5,
-    "segundosVisibles": 2,
-    "monocosPorParry": 10,
-    "turnos": 0,
-    "ftwca": false,
-    "turnoDesactivacion": 0,
-    "nGolpes": 0
+    "monocosPorParry": 5
   },
   {
     "vida": 120.0,
@@ -53,10 +21,22 @@
     "monocos": 5,
     "danoMultiplicador": 1.2,
     "segundosVisibles": 8,
-    "monocosPorParry": 1,
-    "turnos": 0,
-    "ftwca": false,
-    "turnoDesactivacion": 0,
-    "nGolpes": 0
+    "monocosPorParry": 1
+  },
+  {
+    "vida": 50.0,
+    "nombre": "SpeedRunner",
+    "monocos": 50,
+    "danoMultiplicador": 3.5,
+    "segundosVisibles": 2,
+    "monocosPorParry": 10
+  },
+  {
+    "vida": 200.0,
+    "nombre": "Tank_User",
+    "monocos": 0,
+    "danoMultiplicador": 0.8,
+    "segundosVisibles": 10,
+    "monocosPorParry": 3
   }
 ]

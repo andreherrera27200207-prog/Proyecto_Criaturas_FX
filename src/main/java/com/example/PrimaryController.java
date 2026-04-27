@@ -91,7 +91,6 @@ public class PrimaryController implements Initializable {
 
         PruebaController controllerSecond = loader.getController();
 
-
         if (jugadorGeneral != null) {
             controllerSecond.cargarDatos(jugadorGeneral);
             Scene escena = new Scene(root);
