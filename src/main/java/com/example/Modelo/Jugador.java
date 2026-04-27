@@ -4,6 +4,10 @@ package com.example.Modelo;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,16 +19,16 @@ public class Jugador {
 
     static int contadorAtaque = 0;
     static String mensaje = "";
-    protected float vida;
-    protected String nombre;
-    protected int monocos;
-    protected float danoMultiplicador;
-    protected int segundosVisibles;
-    protected int monocosPorParry;
-    protected int turnos; //turnos desde que empezó la partida
-    protected boolean ftwca; //variable de un ataque
+    public float vida;
+    public String nombre;
+    public int monocos;
+    public float danoMultiplicador;
+    public int segundosVisibles;
+    public int monocosPorParry;
+    public int turnos; //turnos desde que empezó la partida
+    public boolean ftwca; //variable de un ataque
     private int turnoDesactivacion; //variable de un ataque
-    protected int nGolpes; //variable para varios ataques
+    public int nGolpes; //variable para varios ataques
     // protected List<String> ataqueString;
     // protected List<Ataque> ataqueLista;
     // protected Ataque ataqueElegido;
@@ -163,7 +167,7 @@ public class Jugador {
     }
 
     public void ejecutarAtaqueEnemigo(int dificultad, int visibilidad, final boolean[] pulsado, TextArea txtArea,
-            ManagerJugador mj)
+            ManagerJugador mj, ReaderJugador rj)
             throws InterruptedException {
 
         if (txtArea == null) {
@@ -213,6 +217,22 @@ public class Jugador {
         turnos++;
         mj.ordenarEnemigos();
         Platform.runLater(() -> txtArea.appendText("El ataque ha finalizado y los enemigos han rotado"));
+
+
+
+        try{
+
+            mj.guardarJugador(this);
+            List<Jugador> lista = new ArrayList<>(mj.getJugadores().values());
+            rj.actualizarJSON(lista);
+
+        } catch (Exception e){
+
+            e.printStackTrace();
+        }
+
+        
+
     }
 
     
