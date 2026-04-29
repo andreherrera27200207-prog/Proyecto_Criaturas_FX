@@ -77,9 +77,7 @@ public class PruebaController implements Initializable {
                 Empezar();
         });
 
-        btnVolver.setOnAction(event -> {
-             
-        });
+        
 
         
 
