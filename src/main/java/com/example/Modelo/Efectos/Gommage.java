@@ -1,0 +1,21 @@
+package com.example.Modelo.Efectos;
+
+import com.example.Modelo.Partida;
+import com.example.Modelo.Efectos.Efecto;
+
+import javafx.application.Platform;
+import javafx.scene.control.TextArea;
+
+public class Gommage implements Efecto{
+
+    @Override
+    public void estrategia(Partida partida, TextArea txt) {
+        partida.getEnemigos().get(0).recibirDano(4*partida.getJugador().getDanoMultiplicador());
+        partida.getEnemigos().get(1).recibirDano(2*partida.getJugador().getDanoMultiplicador());
+        partida.getJugador().anadirGolpes(2);
+        System.out.println();
+        Platform.runLater(() -> txt.appendText("Has hecho " + 4*(partida.getJugador().getDanoMultiplicador()) + " a " + partida.getEnemigos().get(0).getNombre() + " y la mitad a " + partida.getEnemigos().get(1).getNombre() + "\n"));
+        System.out.println();
+    }
+
+}

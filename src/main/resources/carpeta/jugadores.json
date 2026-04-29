@@ -1,0 +1,67 @@
+[
+  {
+    "vida": 100,
+    "nombre": "Programador frustrado",
+    "monocos": 100,
+    "danoMultiplicador": 1.0,
+    "segundosVisibles": 15,
+    "monocosPorParry": 1,
+    "turnos": 0,
+    "ftwca": false,
+    "turnoDesactivacion": 0,
+    "nGolpes": 0,
+    "ataqueLista": ["TripleGolpe", "Potenciacion", "Sobrecarga"]
+  },
+  {
+    "vida": 12,
+    "nombre": "Pablo el master",
+    "monocos": 60,
+    "danoMultiplicador": 1,
+    "segundosVisibles": 8,
+    "monocosPorParry": 4,
+    "turnos": 0,
+    "ftwca": false,
+    "turnoDesactivacion": 0,
+    "nGolpes": 0,
+    "ataqueLista": ["Potenciacion","Ascua","TripleGolpe"]
+  },
+  {
+    "vida": 1,
+    "nombre": "Emi el nohitter",
+    "monocos": 14,
+    "danoMultiplicador": 2.5,
+    "segundosVisibles": 3,
+    "monocosPorParry": 2,
+    "turnos": 1,
+    "ftwca": false,
+    "turnoDesactivacion": 0,
+    "nGolpes": 0,
+    "ataqueLista": ["Gommage","ParaAquellosQueVenganDespues","Ascua"]
+  },
+  {
+    "vida": 8,
+    "nombre": "Jose Manuel el mago",
+    "monocos": 0,
+    "danoMultiplicador": 1.25,
+    "segundosVisibles": 4,
+    "monocosPorParry": 1,
+    "turnos": 0,
+    "ftwca": false,
+    "turnoDesactivacion": 0,
+    "nGolpes": 0,
+    "ataqueLista": ["Rayo","Ascua","Sobrecarga"]
+  },
+  {
+    "vida": 15,
+    "nombre": "Fabricio el paladin",
+    "monocos": 50,
+    "danoMultiplicador": 1,
+    "segundosVisibles": 10,
+    "monocosPorParry": 1,
+    "turnos": 0,
+    "ftwca": false,
+    "turnoDesactivacion": 0,
+    "nGolpes": 0,
+    "ataqueLista": ["ParaAquellosQueVenganDespues","Sobrecarga","TripleGolpe"]
+  }
+]

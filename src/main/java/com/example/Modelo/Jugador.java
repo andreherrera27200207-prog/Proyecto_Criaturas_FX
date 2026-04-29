@@ -4,6 +4,10 @@ package com.example.Modelo;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -20,28 +24,50 @@ public class Jugador {
 
     static int contadorAtaque = 0;
     static String mensaje = "";
-    protected float vida;
-    protected String nombre;
-    protected int monocos;
-    protected float danoMultiplicador;
-    protected int segundosVisibles;
-    protected int monocosPorParry;
-    protected int turnos; // turnos desde que empezó la partida
-    protected boolean ftwca; // variable de un ataque
-    private int turnoDesactivacion; // variable de un ataque
-    protected int nGolpes; // variable para varios ataques
+    public float vida;
+    public String nombre;
+    public int monocos;
+    public float danoMultiplicador;
+    public int segundosVisibles;
+    public int monocosPorParry;
+    public int turnos; //turnos desde que empezó la partida
+    public boolean ftwca; //variable de un ataque
+    private int turnoDesactivacion; //variable de un ataque
+    public int nGolpes; //variable para varios ataques
     // protected List<String> ataqueString;
-    // protected List<Ataque> ataqueLista;
+    protected List<Ataque> ataqueLista;
     // protected Ataque ataqueElegido;
 
     public Jugador() {
 
     }
 
-    /**
-     * 
-     * @return turnoDesactivacion
-     */
+    public Jugador(String nombre,float vida,int monocos,float danoMultiplicador,int segundosVisibles,int monocosPorParry,List<Ataque> ataqueLista) {
+        this.nombre = nombre;
+        this.vida = vida;
+        this.monocos = monocos;
+        this.danoMultiplicador = danoMultiplicador;
+        this.segundosVisibles = segundosVisibles;
+        this.monocosPorParry = monocosPorParry;
+        this.ataqueLista = ataqueLista;
+
+        this.turnos = 0;
+        this.ftwca = false;
+        this.nGolpes = 0;
+        this.turnoDesactivacion = 0;
+    }
+
+    
+
+    public List<Ataque> getAtaqueLista() {
+        return this.ataqueLista;
+    }
+
+    public void setAtaqueLista(List<Ataque> ataqueLista) {
+        this.ataqueLista = ataqueLista;
+    }
+
+
     public int getTurnoDesactivacion() {
         return this.turnoDesactivacion;
     }
@@ -254,12 +280,8 @@ public class Jugador {
     // this.ataqueLista = ataqueLista;
     // }
 
-    /**
-     * 
-     * @param n
-     */
-    public void anadirGolpes(int n) {
-        nGolpes += n;
+    public void anadirGolpes(int n){
+        nGolpes = nGolpes + n;
     }
 
     /**
@@ -281,12 +303,14 @@ public class Jugador {
      * @throws InterruptedException
      */
     public void ejecutarAtaqueEnemigo(int dificultad, int visibilidad, final boolean[] pulsado, TextArea txtArea,
-            ManagerJugador mj)
+            ManagerJugador mj, ReaderJugador rj)
             throws InterruptedException {
 
         if (txtArea == null) {
             System.out.println("ERROR: El TextArea no ha llegado al metodo. Revisa el fx:id en Scene Builder.");
             return;
+        } else {
+            Platform.runLater(() -> txtArea.appendText("El ataque es de dificultad: " + dificultad + "\n"));
         }
 
         pulsado[0] = false;
@@ -301,7 +325,7 @@ public class Jugador {
                         Platform.runLater(() -> txtArea.appendText(mensaje));
                     }
 
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
 
                 }
             } catch (InterruptedException e) {
@@ -313,24 +337,41 @@ public class Jugador {
         contadorThread.join();
 
         if (pulsado[0] && contadorAtaque == dificultad) {
-            Platform.runLater(() -> txtArea.appendText("Parry exitoso"));
-            Platform.runLater(() -> txtArea.appendText("Has conseguido " + monocosPorParry + " Monoco(s)"));
+            Platform.runLater(() -> txtArea.appendText("\nParry exitoso"));
+            Platform.runLater(() -> txtArea.appendText("\nHas conseguido " + monocosPorParry + " Monoco(s)"));
             monocos += monocosPorParry;
         } else {
-            Platform.runLater(() -> txtArea.appendText("Fallaste (" + contadorAtaque + ")"));
+            Platform.runLater(() -> txtArea.appendText("\nFallaste (" + contadorAtaque + ")"));
             vida -= 3;
             nGolpes = 0;
             if (vida < 0)
                 vida = 0;
             Platform.runLater(
-                    () -> txtArea.appendText("Has perdido " + 3 + " de vida. Tienes " + vida + " puntos de vida"));
+                    () -> txtArea.appendText("\nHas perdido " + 3 + " de vida. Tienes " + vida + " puntos de vida\n"));
         }
-        if (turnos == turnoDesactivacion) {
-            danoMultiplicador -= 1;
+        if(turnos == turnoDesactivacion){
+            //una movida de un ataque
+            danoMultiplicador-=1;
         }
         turnos++;
-        mj.ordenarEnemigos();
-        Platform.runLater(() -> txtArea.appendText("El ataque ha finalizado y los enemigos han rotado"));
+        //mj.ordenarEnemigos();
+        Platform.runLater(() -> txtArea.appendText("\nEl ataque ha finalizado y los enemigos han rotado\n"));
+
+
+
+        try{
+
+            mj.guardarJugador(this);
+            List<Jugador> lista = new ArrayList<>(mj.getJugadores().values());
+            //rj.actualizarJSON(lista);
+
+        } catch (Exception e){
+
+            e.printStackTrace();
+        }
+
+        
+
     }
 
     /**
@@ -346,5 +387,14 @@ public class Jugador {
                 "Segundos Visibles: " + getSegundosVisibles() + "s\n" +
                 "Monocos por Parry: " + getMonocosPorParry() + "\n" +
                 "--------------------------";
+    }
+
+    public void ejecutarAtaque(Ataque ataqueSeleccionado, Partida partida, TextArea txt) {
+
+        if (ataqueSeleccionado == null) {
+        System.out.println("No hay ataque seleccionado");  
+        } else {
+            ataqueSeleccionado.getEfecto().estrategia(partida, txt);
+        }
     }
 }
