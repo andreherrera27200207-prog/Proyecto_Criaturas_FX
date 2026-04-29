@@ -1,40 +1,102 @@
 package com.example.Modelo;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import com.example.Modelo.Efectos.Gommage;
+import com.example.Modelo.Efectos.ParaAquellosQueVenganDespues;
+import com.example.Modelo.Efectos.Potenciacion;
+import com.example.Modelo.Efectos.Rayo;
+import com.example.Modelo.Efectos.Ascua;
+import com.example.Modelo.Efectos.Sobrecarga;
+import com.example.Modelo.Efectos.TripleGolpe;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.Modelo.Efectos.Efecto;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class ReaderJugador implements InterfaceReaderJugador {
-    private Path carpeta;
+
     private Path fichero;
     private Gson gson;
 
-    public ReaderJugador(String ruta_carpeta, String ruta_fichero) throws IOException {
-        this.carpeta = Paths.get(ruta_carpeta);
-        if (!Files.exists(carpeta)) {
-            Files.createDirectories(carpeta);
-        }
-
-        this.gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
-        this.fichero = carpeta.resolve(ruta_fichero);
-        if (!Files.exists(fichero)) {
-
-            Files.createFile(fichero);
-        }
-
+    public ReaderJugador() {
+        this.gson = new GsonBuilder().setPrettyPrinting().create();
     }
 
+
+    
+    private Jugador convertir(JugadorDTO dto) {
+        
+        List<Ataque> ataques = new ArrayList<>();
+
+        for (String nombreAtaque : dto.getAtaqueLista()) {
+            ataques.add(crearAtaque(nombreAtaque));
+        }
+
+        return new Jugador(
+            dto.getNombre(),
+            dto.getVida(),
+            dto.getMonocos(),
+            dto.getDanoMultiplicador(),
+            dto.getSegundosVisibles(),
+            dto.getMonocosPorParry(),
+            ataques
+        );
+    }
+
+    private Ataque crearAtaque(String tipo) {
+        Ataque ataque = new Ataque();
+        switch (tipo) {
+        case "Ascua": ataque.setEfecto(new Ascua());
+                    ataque.setNombre(tipo);
+                    ataque.setCoste(1);
+                    break;
+
+        case "Gommage": ataque.setEfecto(new Gommage());
+                    ataque.setNombre(tipo);
+                    ataque.setCoste(3);
+                    break;
+
+        case "ParaAquellosQueVenganDespues": ataque.setEfecto(new ParaAquellosQueVenganDespues());
+                    ataque.setNombre(tipo);
+                    ataque.setCoste(2);
+                    break;
+
+        case "Potenciacion": ataque.setEfecto(new Potenciacion());
+                    ataque.setNombre(tipo);
+                    ataque.setCoste(2);
+                    break;
+
+        case "Rayo": ataque.setEfecto(new Rayo());
+                    ataque.setNombre(tipo);
+                    ataque.setCoste(2);
+                    break;
+
+        case "Sobrecarga": ataque.setEfecto(new Sobrecarga());
+                    ataque.setNombre(tipo);
+                    ataque.setCoste(3);
+                    break;
+
+        case "TripleGolpe": ataque.setEfecto(new TripleGolpe());
+                    ataque.setNombre(tipo);
+                    ataque.setCoste(2);
+                    break;
+        default: throw new IllegalArgumentException("Ataque desconocido: " + tipo);
+    }
+    return ataque;
+}
    
     @Override
     public void guardarJugador(Jugador jugador) throws Exception {
@@ -56,22 +118,69 @@ public class ReaderJugador implements InterfaceReaderJugador {
         java.nio.file.StandardOpenOption.WRITE);
     }
 
+    
+
    
-    @Override
     public List<Jugador> leer() throws Exception {
-        if (Files.size(fichero) == 0) {
-            return new ArrayList<>();
-        }
 
-        String contenido = Files.readString(fichero);
+    InputStream is = getClass().getResourceAsStream("/carpeta/jugadores.json");
 
-        java.lang.reflect.Type tipoLista = new com.google.gson.reflect.TypeToken<ArrayList<Jugador>>() {
-        }.getType();
-        List<Jugador> jugadores_json = gson.fromJson(contenido, tipoLista);
-
-        return (jugadores_json != null) ? jugadores_json : new ArrayList<>();
+    if (is == null) {
+        throw new Exception("No se encontró el JSON en resources");
     }
 
+    java.lang.reflect.Type tipoLista =
+        new com.google.gson.reflect.TypeToken<ArrayList<JugadorDTO>>(){}.getType();
+
+    List<JugadorDTO> dtos =
+        gson.fromJson(new InputStreamReader(is), tipoLista);
+
+    List<Jugador> jugadores = new ArrayList<>();
+
+    if (dtos != null) {
+        for (JugadorDTO dto : dtos) {
+            jugadores.add(convertir(dto));
+        }
+    }
+
+    return jugadores;
+    }
+
+    public Map<String, Jugador> cargarPersonajes() {
+    ObjectMapper mapper = new ObjectMapper();
+
+    try {
+        InputStream is = getClass().getResourceAsStream("/carpeta/jugadores.json");
+
+        if (is == null) {
+            throw new Exception("¡No se encontró el archivo JSON!");
+        }
+
+
+        List<JugadorDTO> dtos =
+                mapper.readValue(is, new TypeReference<List<JugadorDTO>>(){});
+
+
+        List<Jugador> listaTemporal = new ArrayList<>();
+
+        for (JugadorDTO dto : dtos) {
+            listaTemporal.add(convertir(dto));
+        }
+        
+        Map<String, Jugador> diccionario = listaTemporal.stream()
+                .collect(Collectors.toMap(
+                        Jugador::getNombre,
+                        j -> j
+                ));
+
+        return diccionario;
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return new HashMap<>();
+    }
+    
+}
     
 
 }

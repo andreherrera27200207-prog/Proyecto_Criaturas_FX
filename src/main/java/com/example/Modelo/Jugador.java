@@ -30,11 +30,36 @@ public class Jugador {
     private int turnoDesactivacion; //variable de un ataque
     public int nGolpes; //variable para varios ataques
     // protected List<String> ataqueString;
-    // protected List<Ataque> ataqueLista;
+    protected List<Ataque> ataqueLista;
     // protected Ataque ataqueElegido;
 
     public Jugador(){
 
+    }
+
+    public Jugador(String nombre,float vida,int monocos,float danoMultiplicador,int segundosVisibles,int monocosPorParry,List<Ataque> ataqueLista) {
+        this.nombre = nombre;
+        this.vida = vida;
+        this.monocos = monocos;
+        this.danoMultiplicador = danoMultiplicador;
+        this.segundosVisibles = segundosVisibles;
+        this.monocosPorParry = monocosPorParry;
+        this.ataqueLista = ataqueLista;
+
+        this.turnos = 0;
+        this.ftwca = false;
+        this.nGolpes = 0;
+        this.turnoDesactivacion = 0;
+    }
+
+    
+
+    public List<Ataque> getAtaqueLista() {
+        return this.ataqueLista;
+    }
+
+    public void setAtaqueLista(List<Ataque> ataqueLista) {
+        this.ataqueLista = ataqueLista;
     }
 
 
@@ -173,6 +198,8 @@ public class Jugador {
         if (txtArea == null) {
             System.out.println("ERROR: El TextArea no ha llegado al metodo. Revisa el fx:id en Scene Builder.");
             return;
+        } else {
+            Platform.runLater(() -> txtArea.appendText("El ataque es de dificultad: " + dificultad + "\n"));
         }
 
         pulsado[0] = false;
@@ -187,7 +214,7 @@ public class Jugador {
                         Platform.runLater(() -> txtArea.appendText(mensaje));
                     }
 
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
 
                 }
             } catch (InterruptedException e) {
@@ -209,18 +236,27 @@ public class Jugador {
             if (vida < 0)
                 vida = 0;
             Platform.runLater(
-                    () -> txtArea.appendText("\nHas perdido " + 3 + " de vida. Tienes " + vida + " puntos de vida"));
+                    () -> txtArea.appendText("\nHas perdido " + 3 + " de vida. Tienes " + vida + " puntos de vida\n"));
         }
         if(turnos == turnoDesactivacion){
             danoMultiplicador-=1;
         }
         turnos++;
         mj.ordenarEnemigos();
-        Platform.runLater(() -> txtArea.appendText("El ataque ha finalizado y los enemigos han rotado"));
+        Platform.runLater(() -> txtArea.appendText("\nEl ataque ha finalizado y los enemigos han rotado\n"));
 
 
 
-        
+        try{
+
+            mj.guardarJugador(this);
+            List<Jugador> lista = new ArrayList<>(mj.getJugadores().values());
+            //rj.actualizarJSON(lista);
+
+        } catch (Exception e){
+
+            e.printStackTrace();
+        }
 
         
 
@@ -238,5 +274,14 @@ public class Jugador {
                 "Segundos Visibles: " + getSegundosVisibles() + "s\n" +
                 "Monocos por Parry: " + getMonocosPorParry() + "\n" +
                 "--------------------------";
+    }
+
+    public void ejecutarAtaque(Ataque ataqueSeleccionado, Partida partida, TextArea txt) {
+
+        if (ataqueSeleccionado == null) {
+        System.out.println("No hay ataque seleccionado");  
+        } else {
+            ataqueSeleccionado.getEfecto().estrategia(partida, txt);
+        }
     }
 }

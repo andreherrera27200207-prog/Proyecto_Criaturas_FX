@@ -1,42 +1,67 @@
 [
   {
-    "vida": 100.0,
-    "nombre": "Fabricio_Master",
-    "monocos": 10,
-    "danoMultiplicador": 1.5,
-    "segundosVisibles": 5,
-    "monocosPorParry": 2
-  },
-  {
     "vida": 85.5,
-    "nombre": "Entrenador_Pro",
-    "monocos": 25,
-    "danoMultiplicador": 2.0,
+    "nombre": "Programador frustrado",
+    "monocos": 30,
+    "danoMultiplicador": 1.0,
     "segundosVisibles": 3,
-    "monocosPorParry": 5
+    "monocosPorParry": 1,
+    "turnos": 0,
+    "ftwca": false,
+    "turnoDesactivacion": 0,
+    "nGolpes": 0,
+    "ataqueLista": ["TripleGolpe", "Rayo", "Gommage"]
   },
   {
-    "vida": 120.0,
-    "nombre": "Shadow_Player",
-    "monocos": 5,
-    "danoMultiplicador": 1.2,
+    "vida": 111.0,
+    "nombre": "Pablo el master",
+    "monocos": 6,
+    "danoMultiplicador": 10,
     "segundosVisibles": 8,
-    "monocosPorParry": 1
+    "monocosPorParry": 4,
+    "turnos": 0,
+    "ftwca": false,
+    "turnoDesactivacion": 0,
+    "nGolpes": 0,
+    "ataqueLista": ["Potenciacion","Ascua","TripleGolpe"]
+  },
+  {
+    "vida": 97.0,
+    "nombre": "Emi el nohitter",
+    "monocos": 14,
+    "danoMultiplicador": -1.5,
+    "segundosVisibles": 3,
+    "monocosPorParry": 2,
+    "turnos": 1,
+    "ftwca": false,
+    "turnoDesactivacion": 0,
+    "nGolpes": 0,
+    "ataqueLista": ["Gommage","Potenciacion","Ascua"]
   },
   {
     "vida": 50.0,
-    "nombre": "SpeedRunner",
-    "monocos": 50,
+    "nombre": "Jose Manuel el mago",
+    "monocos": 0,
     "danoMultiplicador": 3.5,
-    "segundosVisibles": 2,
-    "monocosPorParry": 10
+    "segundosVisibles": 4,
+    "monocosPorParry": 1,
+    "turnos": 0,
+    "ftwca": false,
+    "turnoDesactivacion": 0,
+    "nGolpes": 0,
+    "ataqueLista": ["Rayo","Ascua","Sobrecarga"]
   },
   {
     "vida": 200.0,
-    "nombre": "Tank_User",
-    "monocos": 0,
-    "danoMultiplicador": 0.8,
+    "nombre": "Fabricio el paladin",
+    "monocos": 3,
+    "danoMultiplicador": 1,
     "segundosVisibles": 10,
-    "monocosPorParry": 3
+    "monocosPorParry": 1,
+    "turnos": 0,
+    "ftwca": false,
+    "turnoDesactivacion": 0,
+    "nGolpes": 0,
+    "ataqueLista": ["ParaAquellosQueVenganDespues","Sobrecarga","TripleGolpe"]
   }
 ]
