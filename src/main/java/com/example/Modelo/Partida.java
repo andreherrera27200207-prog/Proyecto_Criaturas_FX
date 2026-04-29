@@ -92,8 +92,14 @@ public class Partida {
          
     }
 
-    public List<Jugador> ordenarEnemigos(List<Jugador> lista) {       
-        while(lista.get(0).getVida() <= 0){
+    public List<Jugador> ordenarEnemigos(List<Jugador> lista) {     
+        boolean flag = false;
+        for(Jugador jugador : lista){
+            if(jugador.getVida() > 0)
+                flag = true;
+        }
+        
+        while(lista.get(0).getVida() <= 0 && flag){
             Jugador primero = lista.remove(0);
             lista.add(primero);           
         }
