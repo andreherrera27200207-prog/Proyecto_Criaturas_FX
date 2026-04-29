@@ -14,7 +14,6 @@ public class Sobrecarga implements Efecto{
         partida.getJugador().anadirGolpes(1);
         System.out.println();
         Platform.runLater(() -> txt.appendText("Has hecho " + partida.getJugador().getNGolpes()*partida.getJugador().getDanoMultiplicador() + " de daño a " + partida.getEnemigos().get(0).getNombre() + "\n"));
-        System.out.println();
     }
 
 }

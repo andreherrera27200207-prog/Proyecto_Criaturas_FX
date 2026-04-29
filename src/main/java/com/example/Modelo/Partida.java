@@ -26,6 +26,17 @@ public class Partida {
     private Jugador jugador;
     private List<Jugador> enemigos;
     private Map<String, Jugador> personajes;
+    private boolean juegoAcabado;
+
+
+
+    public boolean getJuegoAcabado() {
+        return this.juegoAcabado;
+    }
+
+    public void setJuegoAcabado(boolean juegoAcabado) {
+        this.juegoAcabado = juegoAcabado;
+    }
 
 
     public Jugador getJugador() {
@@ -77,5 +88,26 @@ public class Partida {
                 }
             }
         }
+
+         
     }
+
+    public List<Jugador> ordenarEnemigos(List<Jugador> lista) {       
+        while(lista.get(0).getVida() <= 0){
+            Jugador primero = lista.remove(0);
+            lista.add(primero);           
+        }
+        return lista;
+    }
+
+    public boolean todosMuertos(List<Jugador> enemigos) {
+        for (Jugador e : enemigos) {
+            if (e.getVida() > 0) {
+                return false;
+            }
+        }
+    return true;
+}
+
+    
 }

@@ -184,7 +184,7 @@ public class Jugador {
     // }
 
     public void anadirGolpes(int n){
-        nGolpes += n;
+        nGolpes = nGolpes + n;
     }
     public void Ftwca(int turno){
 
@@ -239,10 +239,11 @@ public class Jugador {
                     () -> txtArea.appendText("\nHas perdido " + 3 + " de vida. Tienes " + vida + " puntos de vida\n"));
         }
         if(turnos == turnoDesactivacion){
+            //una movida de un ataque
             danoMultiplicador-=1;
         }
         turnos++;
-        mj.ordenarEnemigos();
+        //mj.ordenarEnemigos();
         Platform.runLater(() -> txtArea.appendText("\nEl ataque ha finalizado y los enemigos han rotado\n"));
 
 

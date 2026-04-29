@@ -61,7 +61,7 @@ public class ReaderJugador implements InterfaceReaderJugador {
         switch (tipo) {
         case "Ascua": ataque.setEfecto(new Ascua());
                     ataque.setNombre(tipo);
-                    ataque.setCoste(1);
+                    ataque.setCoste(5);
                     break;
 
         case "Gommage": ataque.setEfecto(new Gommage());
