@@ -76,7 +76,6 @@ public class PrimaryController implements Initializable {
         
 
         cbojugador.setItems(FXCollections.observableArrayList(jugadores));
-        System.out.println("JUGADORES LEIDOS: " + jugadores.size());
         cbojugador.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(Jugador item, boolean empty) {

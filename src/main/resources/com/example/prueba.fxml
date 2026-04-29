@@ -5,18 +5,34 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.PruebaController">
    <children>
-      <TextArea fx:id="txtArea" layoutX="31.0" layoutY="247.0" prefHeight="108.0" prefWidth="467.0" />
-      <Button fx:id="btnEmpezar" layoutX="255.0" layoutY="157.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="126.0" text="Recibir Ataque" />
-      <Button fx:id="btnDetener" layoutX="434.0" layoutY="129.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="186.0" text="Bloquear" />
-      <Label fx:id="lblJugador" alignment="CENTER" layoutX="231.0" layoutY="41.0" prefHeight="39.0" prefWidth="205.0" text="Jugador" />
-      <ComboBox fx:id="cmbAtaques" layoutX="44.0" layoutY="68.0" prefHeight="26.0" prefWidth="150.0" promptText="Atacar" />
-      <Button fx:id="btnAtaque" layoutX="66.0" layoutY="164.0" mnemonicParsing="false" text="Ejecutar Ataque" />
-      <Label fx:id="lblVida" layoutX="548.0" layoutY="247.0" prefHeight="18.0" prefWidth="63.0" text="10" />
-      <Label fx:id="lblMonocos" layoutX="572.0" layoutY="279.0" prefHeight="18.0" prefWidth="30.0" text="10" />
-      <Label layoutX="513.0" layoutY="247.0" text="Vida:" />
-      <Label fx:id="lblMonocosText" layoutX="512.0" layoutY="280.0" text="Monocos:" />
+      <TextArea fx:id="txtArea" layoutX="169.0" layoutY="257.0" prefHeight="108.0" prefWidth="467.0" />
+      <Button fx:id="btnEmpezar" layoutX="94.0" layoutY="42.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="126.0" text="Recibir Ataque" />
+      <Button fx:id="btnDetener" layoutX="271.0" layoutY="42.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="188.0" text="Bloquear" />
+      <Label fx:id="lblJugador" alignment="CENTER" layoutX="-9.0" layoutY="103.0" prefHeight="39.0" prefWidth="205.0" text="Jugador" />
+      <ComboBox fx:id="cmbAtaques" layoutX="504.0" layoutY="71.0" prefHeight="26.0" prefWidth="150.0" promptText="Atacar" />
+      <Button fx:id="btnAtaque" layoutX="530.0" layoutY="29.0" mnemonicParsing="false" text="Ejecutar Ataque" />
+      <Label fx:id="lblVida" layoutX="80.0" layoutY="261.0" prefHeight="18.0" prefWidth="63.0" text="10" />
+      <Label fx:id="lblMonocos" layoutX="104.0" layoutY="293.0" prefHeight="18.0" prefWidth="30.0" text="10" />
+      <Label layoutX="45.0" layoutY="261.0" text="Vida:" />
+      <Label fx:id="lblMonocosText" layoutX="44.0" layoutY="294.0" text="Monocos:" />
+      <Circle fill="DODGERBLUE" layoutX="94.0" layoutY="191.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label layoutX="175.0" layoutY="182.0" text="VS" />
+      <Circle fill="#ff311f" layoutX="239.0" layoutY="169.0" radius="26.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#ff311f" layoutX="365.0" layoutY="169.0" radius="26.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#ff311f" layoutX="485.0" layoutY="169.0" radius="26.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#ff311f" layoutX="602.0" layoutY="169.0" radius="26.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="txtFirst" layoutX="169.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="138.39996337890625" />
+      <Text fx:id="txtSecond" layoutX="296.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="138.39996337890625" />
+      <Text fx:id="txtThird" layoutX="415.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="138.39996337890625" />
+      <Text fx:id="txtFourth" layoutX="533.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="138.39996337890625" />
+      <Text fx:id="txtHfirst" layoutX="170.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="138.39996337890625" />
+      <Text fx:id="txtHsecond" layoutX="296.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="138.39996337890625" />
+      <Text fx:id="txtHthird" layoutX="415.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="138.39996337890625" />
+      <Text fx:id="txtHfourth" layoutX="533.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="138.39996337890625" />
    </children>
 </AnchorPane>

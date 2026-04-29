@@ -11,9 +11,9 @@ public class Ascua implements Efecto {
     @Override
     public void estrategia(Partida partida, TextArea txt) {
         partida.getEnemigos().get(0).setVida(1);
+        partida.getJugador().anadirGolpes(1);
         System.out.println();
         Platform.runLater(() -> txt.appendText("Has establecido la vida de " + partida.getEnemigos().get(0).getNombre() + " en 1" + "\n"));
-        System.out.println();
         
     }
     

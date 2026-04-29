@@ -13,6 +13,7 @@ public class Rayo implements Efecto{
         partida.getEnemigos().get(1).recibirDano(3*partida.getJugador().getDanoMultiplicador());
         partida.getEnemigos().get(0).recibirDano(1.5f*partida.getJugador().getDanoMultiplicador());
         partida.getEnemigos().get(2).recibirDano(1.5f*partida.getJugador().getDanoMultiplicador());
+        partida.getJugador().anadirGolpes(3);
         System.out.println();
         Platform.runLater(() -> txt.appendText("Has golpeado a " + partida.getEnemigos().get(1).getNombre() + " y le has hecho la mitad del daño a los adyacentes" + "\n"));
         System.out.println();
