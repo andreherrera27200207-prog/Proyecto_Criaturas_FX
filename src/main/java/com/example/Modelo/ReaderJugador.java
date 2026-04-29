@@ -17,6 +17,7 @@ import com.example.Modelo.Efectos.Gommage;
 import com.example.Modelo.Efectos.ParaAquellosQueVenganDespues;
 import com.example.Modelo.Efectos.Potenciacion;
 import com.example.Modelo.Efectos.Rayo;
+import com.example.Modelo.Efectos.Impactrueno;
 import com.example.Modelo.Efectos.Ascua;
 import com.example.Modelo.Efectos.Sobrecarga;
 import com.example.Modelo.Efectos.TripleGolpe;
@@ -93,6 +94,10 @@ public class ReaderJugador implements InterfaceReaderJugador {
                     ataque.setNombre(tipo);
                     ataque.setCoste(2);
                     break;
+        case "Impactrueno": ataque.setEfecto(new Impactrueno());
+                    ataque.setNombre(tipo);
+                    ataque.setCoste(2);
+                    break;            
 
         case "Potenciacion": ataque.setEfecto(new Potenciacion());
                     ataque.setNombre(tipo);

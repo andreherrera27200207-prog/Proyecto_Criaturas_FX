@@ -1,16 +1,21 @@
 package com.example;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.swing.DesktopManager;
 
 import com.example.Modelo.Jugador;
 import com.example.Modelo.ManagerJugador;
 import com.example.Modelo.ReaderJugador;
 
 import javafx.collections.FXCollections;
+import java.awt.Desktop;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,6 +46,9 @@ public class PrimaryController implements Initializable {
     private Button btnEmpezar;
 
     @FXML
+    private Button btnGoogle;
+
+    @FXML
     private ComboBox<Jugador> cbojugador;
 
     /**
@@ -48,6 +56,16 @@ public class PrimaryController implements Initializable {
      */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+
+        btnGoogle.setOnAction(event ->{
+            
+            try {
+                Desktop.getDesktop().browse(new URI("https://github.com/andreherrera27200207-prog/Proyecto_Criaturas_FX"));
+            } catch (IOException | URISyntaxException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
         
         try {
             rj = new ReaderJugador();

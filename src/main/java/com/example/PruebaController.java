@@ -27,13 +27,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
- /**
-     * @author Emilio
-     * @author Fabricio
-     * @author JoseManuel
-     * @version 1.0
-     * @since 1.0
-     */
+/**
+ * @author Emilio
+ * @author Fabricio
+ * @author JoseManuel
+ * @version 1.0
+ * @since 1.0
+ */
 
 public class PruebaController implements Initializable {
 
@@ -41,8 +41,8 @@ public class PruebaController implements Initializable {
     private void switchToSecondary() throws IOException {
         App.setRoot("secondary");
     }
+
     @FXML
-    
 
     final boolean[] verdad = { false };
 
@@ -51,15 +51,15 @@ public class PruebaController implements Initializable {
     private ManagerJugador mj;
     private ReaderJugador rj;
     private Partida partida;
-
+    private Ataque ataqueAcumulado;
     
+
     /**
      * inicializar todo en el controlador
      */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        
-        
+
         try {
             rj = new ReaderJugador();
             mj = new ManagerJugador();
@@ -70,8 +70,6 @@ public class PruebaController implements Initializable {
                 mj.guardarJugador(jugador);
             }
 
-            
-
         } catch (IOException e) {
 
             e.printStackTrace();
@@ -80,85 +78,68 @@ public class PruebaController implements Initializable {
             e.printStackTrace();
         }
 
-        
-
         btnEmpezar.setOnAction(event -> {
-            if(!partida.getJuegoAcabado())
+            if (!partida.getJuegoAcabado())
                 Empezar();
         });
 
-        
-
-        
-
-       btnAtaque.setOnAction(event -> {
-            if(!partida.getJuegoAcabado()){
+        btnAtaque.setOnAction(event -> {
+            if (!partida.getJuegoAcabado()) {
                 Ataque ataque = cmbAtaques.getValue();
 
-            if (ataque == null) {
-                Platform.runLater(() ->
-                    txtArea.appendText("No has seleccionado ningún ataque!\n")
-                );
-                return;
-            }
-        
-            if (jugadorGeneral.getMonocos() < ataque.getCoste()) {
-                Platform.runLater(() ->
-                    txtArea.appendText("No tienes suficientes Monocos!\n")
-                );
-                return;
-            }
-        
+                if (ataque == null) {
+                    Platform.runLater(() -> txtArea.appendText("No has seleccionado ningún ataque!\n"));
+                    return;
+                }
 
-            jugadorGeneral.ejecutarAtaque(ataque, partida, txtArea);
-        
-            List<Jugador> enemigos = partida.getEnemigos();
-        
-            for (int i = 0; i < enemigos.size(); i++) {
-            
-                Jugador enemigo = enemigos.get(i);
-            
-                if (enemigo.getVida() <= 0) {
-                    enemigo.setVida(0);
+                if (jugadorGeneral.getMonocos() < ataque.getCoste()) {
+                    Platform.runLater(() -> txtArea.appendText("No tienes suficientes Monocos!\n"));
+                    return;
+                }
+
                 
 
-                    if (i == 0) {
-                        partida.setEnemigos(
-                            partida.ordenarEnemigos(enemigos)
-                        );
-                        break;
+                jugadorGeneral.ejecutarAtaque(ataque, partida, txtArea);
+
+                List<Jugador> enemigos = partida.getEnemigos();
+
+                for (int i = 0; i < enemigos.size(); i++) {
+
+                    Jugador enemigo = enemigos.get(i);
+
+                    if (enemigo.getVida() <= 0) {
+                        enemigo.setVida(0);
+
+                        if (i == 0) {
+                            partida.setEnemigos(
+                                    partida.ordenarEnemigos(enemigos));
+                            break;
+                        }
                     }
                 }
+
+                if (partida.todosMuertos(partida.getEnemigos())) {
+                    partida.setJuegoAcabado(true);
+                    Platform.runLater(() -> txtArea.appendText(
+                            "Has completado la expedicion horripilante any% glitchless speedrun mode, felicidades\n"));
+                }
+
+                jugadorGeneral.setMonocos(jugadorGeneral.getMonocos() - ataque.getCoste());
+
+                mostrarTextos();
+
+                lblVida.setText(String.valueOf(jugadorGeneral.getVida()));
+                lblMonocos.setText(String.valueOf(jugadorGeneral.getMonocos()));
             }
 
-            if (partida.todosMuertos(partida.getEnemigos())) {
-                partida.setJuegoAcabado(true);
-    Platform.runLater(() ->
-        txtArea.appendText("Has completado la expedicion horripilante any% glitchless speedrun mode, felicidades\n")
-    );
-}
-
-    
-
-        jugadorGeneral.setMonocos(jugadorGeneral.getMonocos() - ataque.getCoste());
-
-            mostrarTextos();
-
-            lblVida.setText(String.valueOf(jugadorGeneral.getVida()));
-            lblMonocos.setText(String.valueOf(jugadorGeneral.getMonocos()));
-        }
-            
         });
 
         btnDetener.setOnAction(event -> {
             verdad[0] = true;
         });
 
-        
-
     }
 
-     
     @FXML
     private Text txtFirst;
 
@@ -171,7 +152,6 @@ public class PruebaController implements Initializable {
     @FXML
     private Text txtFourth;
 
-
     @FXML
     private Text txtHfirst;
 
@@ -183,8 +163,6 @@ public class PruebaController implements Initializable {
 
     @FXML
     private Text txtHfourth;
-
-
 
     @FXML
     private TextArea txtArea;
@@ -212,22 +190,18 @@ public class PruebaController implements Initializable {
 
     @FXML
     private Label lblJugador;
-    
+
     @FXML
     private ComboBox<Ataque> cmbAtaques;
 
-    
     public void buscarPorNombre() {
         jugadorGeneral = mj.buscarJugador(txtNombre.getText());
         txtNombre.setText("");
         lblJugador.setText(jugadorGeneral.getNombre());
-        
-        
+
     }
 
-    
-    
-    public void cargarDatos(Jugador jugador){
+    public void cargarDatos(Jugador jugador) {
         this.jugadorGeneral = jugador;
         partida = new Partida(jugadorGeneral);
         lblJugador.setText(jugadorGeneral.getNombre());
@@ -236,7 +210,7 @@ public class PruebaController implements Initializable {
         lblMonocos.setText(String.valueOf(jugadorGeneral.getMonocos()));
 
         mostrarTextos();
-        
+
     }
 
     public void Empezar() {
@@ -244,17 +218,17 @@ public class PruebaController implements Initializable {
 
             try {
                 Random random = new Random();
-                jugadorGeneral.ejecutarAtaqueEnemigo(random.nextInt(10)+5, jugadorGeneral.getSegundosVisibles(), verdad, txtArea, mj, rj);
+                jugadorGeneral.ejecutarAtaqueEnemigo(random.nextInt(10) + 5, jugadorGeneral.getSegundosVisibles(),
+                        verdad, txtArea, mj, rj);
                 partida.setEnemigos(partida.ordenarEnemigos(partida.getEnemigos()));
-                if(jugadorGeneral.getVida() <= 0){
+                if (jugadorGeneral.getVida() <= 0) {
                     jugadorGeneral.setVida(0);
                     partida.setJuegoAcabado(true);
-                     Platform.runLater(() ->
-        txtArea.appendText("Fue hit definitivamente. Te has muerto, eres la única persona de tu familia que ha perdido\nEres la vergüenza de tu linaje")
-    );
+                    Platform.runLater(() -> txtArea.appendText(
+                            "Fue hit definitivamente. Te has muerto, eres la única persona de tu familia que ha perdido\nEres la vergüenza de tu linaje"));
                 }
                 mostrarTextos();
-                
+
             } catch (InterruptedException e) {
 
                 e.printStackTrace();
@@ -262,42 +236,41 @@ public class PruebaController implements Initializable {
 
         }).start();
 
-        
     }
 
     private void mostrarTextos() {
 
         Platform.runLater(() -> {
 
-        lblVida.setText(String.valueOf(jugadorGeneral.getVida()));
-        lblMonocos.setText(String.valueOf(jugadorGeneral.getMonocos()));
+            lblVida.setText(String.valueOf(jugadorGeneral.getVida()));
+            lblMonocos.setText(String.valueOf(jugadorGeneral.getMonocos()));
 
-        List<Jugador> enemigos = partida.getEnemigos();
+            List<Jugador> enemigos = partida.getEnemigos();
 
-        mostrarEnemigo(enemigos, 0, txtFirst, txtHfirst);
-        mostrarEnemigo(enemigos, 1, txtSecond, txtHsecond);
-        mostrarEnemigo(enemigos, 2, txtThird, txtHthird);
-        mostrarEnemigo(enemigos, 3, txtFourth, txtHfourth);
+            mostrarEnemigo(enemigos, 0, txtFirst, txtHfirst);
+            mostrarEnemigo(enemigos, 1, txtSecond, txtHsecond);
+            mostrarEnemigo(enemigos, 2, txtThird, txtHthird);
+            mostrarEnemigo(enemigos, 3, txtFourth, txtHfourth);
         });
     }
 
     private void mostrarEnemigo(List<Jugador> enemigos, int index, Text nombre, Text vida) {
 
-    if (index >= enemigos.size()) {
-        nombre.setText("");
-        vida.setText("");
-        return;
-    }
+        if (index >= enemigos.size()) {
+            nombre.setText("");
+            vida.setText("");
+            return;
+        }
 
-    Jugador j = enemigos.get(index);
+        Jugador j = enemigos.get(index);
 
-    if (j.getVida() <= 0) {
-        nombre.setText(j.getNombre());
-        vida.setText("muelto");
-    } else {
-        nombre.setText(j.getNombre());
-        vida.setText(String.valueOf(j.getVida()));
+        if (j.getVida() <= 0) {
+            nombre.setText(j.getNombre());
+            vida.setText("muelto");
+        } else {
+            nombre.setText(j.getNombre());
+            vida.setText(String.valueOf(j.getVida()));
+        }
     }
-}
 
 }

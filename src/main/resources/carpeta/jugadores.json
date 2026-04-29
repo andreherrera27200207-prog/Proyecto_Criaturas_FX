@@ -52,6 +52,19 @@
     "ataqueLista": ["Rayo","Ascua","Sobrecarga"]
   },
   {
+    "vida": 240,
+    "nombre": "Brino el Rino",
+    "monocos": 80,
+    "danoMultiplicador": 1,
+    "segundosVisibles": 8,
+    "monocosPorParry": 2,
+    "turnos": 0,
+    "ftwca": false,
+    "turnoDesactivacion": 0,
+    "nGolpes": 0,
+    "ataqueLista": ["Impactrueno"]
+  },
+  {
     "vida": 15,
     "nombre": "Fabricio el paladin",
     "monocos": 50,
@@ -62,6 +75,6 @@
     "ftwca": false,
     "turnoDesactivacion": 0,
     "nGolpes": 0,
-    "ataqueLista": ["ParaAquellosQueVenganDespues","Sobrecarga","TripleGolpe"]
+    "ataqueLista": ["Potenciacion","Ascua","TripleGolpe"]
   }
 ]
