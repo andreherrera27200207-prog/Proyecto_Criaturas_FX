@@ -21,6 +21,14 @@ import com.example.Modelo.Efectos.TripleGolpe;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+ /**
+     * @author Emilio
+     * @author Fabricio
+     * @author JoseManuel
+     * @version 1.0
+     * @since 1.0
+     */
+
 public class Partida {
     private Jugador jugador;
     private List<Jugador> enemigos;
@@ -28,16 +36,27 @@ public class Partida {
     private boolean juegoAcabado;
 
 
-
+    /**
+     * 
+     * @return devuelve el booleano
+     */
     public boolean getJuegoAcabado() {
         return this.juegoAcabado;
     }
 
+    /**
+     * 
+     * @param juegoAcabado
+     */
     public void setJuegoAcabado(boolean juegoAcabado) {
         this.juegoAcabado = juegoAcabado;
     }
 
 
+    /**
+     * 
+     * @return el jugador
+     */
     public Jugador getJugador() {
         return this.jugador;
     }
@@ -83,6 +102,10 @@ public class Partida {
     }
 
 
+    /**
+     * 
+     * @param jugadorElegido
+     */
     public Partida(Jugador jugadorElegido) {
 
         this.jugador = jugadorElegido;
@@ -111,6 +134,11 @@ public class Partida {
          
     }
 
+    /**
+     * 
+     * @param lista
+     * @return el boleano para ordenarEnemigos
+     */
     public List<Jugador> ordenarEnemigos(List<Jugador> lista) {     
         boolean flag = false;
         for(Jugador jugador : lista){

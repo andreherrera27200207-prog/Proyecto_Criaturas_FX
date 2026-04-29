@@ -1,7 +1,23 @@
 package com.example.Modelo;
 import java.util.List;
+/**
+ * @author Emilio
+ * @author Fabricio
+ * @author JoseManuel
+ */
+
 
 public class JugadorDTO {
+    /**
+     * @param vida
+     * @param nombre
+     * @param monococos
+     * @param danoMultiplicador
+     * @param segundosVisibles
+     * @param monocosPorParry
+     * @param listaAtaque
+     */
+    
     private float vida;
     private String nombre;
     private int monocos;

@@ -26,8 +26,19 @@ import com.example.Modelo.Efectos.Efecto;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+ /**
+     * @author Emilio
+     * @author Fabricio
+     * @author JoseManuel
+     * @version 1.0
+     * @since 1.0
+     */
 public class ReaderJugador implements InterfaceReaderJugador {
 
+    /**
+     * @param fichero
+     * @param gson
+     */
     private Path fichero;
     private Gson gson;
 
@@ -36,7 +47,11 @@ public class ReaderJugador implements InterfaceReaderJugador {
     }
 
 
-    
+    /**
+     * 
+     * @param dto
+     * @return el jugador con su equipo
+     */
     private Jugador convertir(JugadorDTO dto) {
         
         List<Ataque> ataques = new ArrayList<>();
@@ -56,6 +71,11 @@ public class ReaderJugador implements InterfaceReaderJugador {
         );
     }
 
+    /**
+     * 
+     * @param tipo
+     * @return el ataque
+     */
     private Ataque crearAtaque(String tipo) {
         Ataque ataque = new Ataque();
         switch (tipo) {
@@ -97,7 +117,9 @@ public class ReaderJugador implements InterfaceReaderJugador {
     }
     return ataque;
 }
-   
+   /**
+    * guardar jugador
+    */
     @Override
     public void guardarJugador(Jugador jugador) throws Exception {
 
@@ -110,6 +132,11 @@ public class ReaderJugador implements InterfaceReaderJugador {
         Files.writeString(fichero, json, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
+    /**
+     * 
+     * @param lista_actualizada
+     * @throws IOException
+     */
     public void actualizarJSON(List<Jugador> lista_actualizada) throws IOException{
         String json = gson.toJson(lista_actualizada);
         Files.writeString(fichero, json, 
@@ -121,6 +148,9 @@ public class ReaderJugador implements InterfaceReaderJugador {
     
 
    
+    /**
+     * @return jugador
+     */
     public List<Jugador> leer() throws Exception {
 
     InputStream is = getClass().getResourceAsStream("/carpeta/jugadores.json");
@@ -146,6 +176,10 @@ public class ReaderJugador implements InterfaceReaderJugador {
     return jugadores;
     }
 
+    /**
+     * 
+     * @return mapa con los objetos jugadores
+     */
     public Map<String, Jugador> cargarPersonajes() {
     ObjectMapper mapper = new ObjectMapper();
 

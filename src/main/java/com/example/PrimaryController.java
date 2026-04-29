@@ -22,6 +22,12 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * @author Emilio
+ * @author Fabricio
+ * @author JoseManuel
+ */
+
 public class PrimaryController implements Initializable {
 
     private Jugador jugadorGeneral;
@@ -37,6 +43,9 @@ public class PrimaryController implements Initializable {
     @FXML
     private ComboBox<Jugador> cbojugador;
 
+    /**
+     * iniciar todo el controlador
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         
@@ -101,6 +110,10 @@ public class PrimaryController implements Initializable {
         });
     }
 
+    /**
+     * 
+     * @throws IOException
+     */
     public void Empezar() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prueba.fxml"));
         Parent root = loader.load();

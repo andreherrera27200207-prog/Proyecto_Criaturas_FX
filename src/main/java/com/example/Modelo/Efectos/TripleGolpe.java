@@ -6,8 +6,19 @@ import com.example.Modelo.Efectos.Efecto;
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 
+ /**
+     * @author Emilio
+     * @author Fabricio
+     * @author JoseManuel
+     * @version 1.0
+     * @since 1.0
+     */
+
 public class TripleGolpe implements Efecto{
 
+    /**
+     * comportamiento del ataque TripleGolpe
+     */
     @Override
     public void estrategia(Partida partida, TextArea txt) {
         partida.getEnemigos().get(0).setVida(partida.getEnemigos().get(0).getVida()-1.2f*partida.getJugador().getDanoMultiplicador());

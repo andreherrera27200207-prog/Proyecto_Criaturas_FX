@@ -27,6 +27,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+ /**
+     * @author Emilio
+     * @author Fabricio
+     * @author JoseManuel
+     * @version 1.0
+     * @since 1.0
+     */
+
 public class PruebaController implements Initializable {
 
     @FXML
@@ -45,7 +53,9 @@ public class PruebaController implements Initializable {
     private Partida partida;
 
     
-    
+    /**
+     * inicializar todo en el controlador
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         

@@ -1,3 +1,12 @@
+
+ /**
+     * @author Emilio
+     * @author Fabricio
+     * @author JoseManuel
+     * @version 1.0
+     * @since 1.0
+     */
+
 module com.example {
     requires transitive javafx.controls;
     requires javafx.fxml;

@@ -6,8 +6,19 @@ import com.example.Modelo.Efectos.Efecto;
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 
+ /**
+     * @author Emilio
+     * @author Fabricio
+     * @author JoseManuel
+     * @version 1.0
+     * @since 1.0
+     */
+
 public class Potenciacion implements Efecto{
 
+    /**
+     * comportamiento del ataque Potenciacion
+     */
     @Override
     public void estrategia(Partida partida, TextArea txt) {
         partida.getJugador().setDanoMultiplicador(partida.getJugador().getDanoMultiplicador()+0.2f);

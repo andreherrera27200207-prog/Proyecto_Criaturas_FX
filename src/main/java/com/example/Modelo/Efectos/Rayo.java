@@ -6,8 +6,19 @@ import com.example.Modelo.Efectos.Efecto;
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 
+ /**
+     * @author Emilio
+     * @author Fabricio
+     * @author JoseManuel
+     * @version 1.0
+     * @since 1.0
+     */
+
 public class Rayo implements Efecto{
 
+    /**
+     * comportamiento del ataque Rayo
+     */
     @Override
     public void estrategia(Partida partida, TextArea txt) {
         partida.getEnemigos().get(1).recibirDano(3*partida.getJugador().getDanoMultiplicador());

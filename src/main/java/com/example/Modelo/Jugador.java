@@ -12,12 +12,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Jugador {
-    /**
+ /**
      * @author Emilio
      * @author Fabricio
      * @author JoseManuel
+     * @version 1.0
+     * @since 1.0
      */
+    
+public class Jugador {
 
     @JsonProperty("Jugador")
     public String jugadorTag;
@@ -59,6 +62,10 @@ public class Jugador {
 
     
 
+    /**
+     * 
+     * @return la lista del ataque
+     */
     public List<Ataque> getAtaqueLista() {
         return this.ataqueLista;
     }
@@ -68,6 +75,10 @@ public class Jugador {
     }
 
 
+    /**
+     * 
+     * @return turno
+     */
     public int getTurnoDesactivacion() {
         return this.turnoDesactivacion;
     }
@@ -280,6 +291,10 @@ public class Jugador {
     // this.ataqueLista = ataqueLista;
     // }
 
+    /**
+     * 
+     * @param n
+     */
     public void anadirGolpes(int n){
         nGolpes = nGolpes + n;
     }
@@ -388,6 +403,13 @@ public class Jugador {
                 "Monocos por Parry: " + getMonocosPorParry() + "\n" +
                 "--------------------------";
     }
+
+    /**
+     * 
+     * @param ataqueSeleccionado
+     * @param partida
+     * @param txt
+     */
 
     public void ejecutarAtaque(Ataque ataqueSeleccionado, Partida partida, TextArea txt) {
 
